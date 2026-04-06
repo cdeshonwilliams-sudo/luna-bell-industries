@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luna-Bell Industries | Environmental Testing & Inspection</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --red: #c8272d;
+    --cream: #f5f2eb;
+    --white: #ffffff;
+    --light-gray: #e8e4dc;
+    --text-dark: #111827;
+    --text-mid: #4b5563;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.4);
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+  .hex-sm {
+    width: 40px; height: 40px;
+    background: var(--red);
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .hex-sm span {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700; font-size: 13px;
+    color: var(--white); letter-spacing: .5px;
+  }
+  .nav-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: 16px;
+    color: var(--white); letter-spacing: 1px;
+    line-height: 1.1;
+  }
+  .nav-name small {
+    display: block;
+    font-size: 10px; font-weight: 400;
+    color: var(--red); letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-cta {
+    background: var(--red); color: var(--white) !important;
+    padding: 8px 20px; border-radius: 2px;
+    transition: background .2s !important;
+  }
+  .nav-cta:hover { background: #a31f24 !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,.03) 59px, rgba(255,255,255,.03) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,.03) 59px, rgba(255,255,255,.03) 60px);
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 120px 5% 80px 8%;
+    position: relative; z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,39,45,.15);
+    border: 1px solid rgba(200,39,45,.4);
+    border-radius: 2px;
+    padding: 6px 14px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+  .hero-badge span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--red);
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: .95;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .hero-desc {
+    font-size: 17px; line-height: 1.7;
+    color: rgba(255,255,255,.6);
+    max-width: 440px;
+    margin-bottom: 40px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--red); color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 16px 32px; text-decoration: none;
+    border-radius: 2px;
+    transition: background .2s, transform .2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #a31f24; transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,.3); color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 16px 32px; text-decoration: none;
+    border-radius: 2px;
+    transition: border-color .2s, background .2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.05); }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 8% 80px 5%;
+    position: relative; z-index: 2;
+  }
+
+  /* Large hex logo */
+  .logo-hero {
+    position: relative;
+    animation: floatY 6s ease-in-out infinite;
+  }
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+  .hex-large {
+    width: 280px; height: 280px;
+    background: var(--red);
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 0 80px rgba(200,39,45,.4);
+  }
+  .hex-large .initials {
+    font-family: 'Oswald', sans-serif;
+    font-size: 80px; font-weight: 700;
+    color: var(--white); letter-spacing: 2px;
+    line-height: 1;
+  }
+  .hex-large .underline-bar {
+    width: 60px; height: 4px;
+    background: var(--white);
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+  .hex-ring {
+    position: absolute; inset: -20px;
+    border: 2px solid rgba(200,39,45,.3);
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    animation: spin 20s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-stats {
+    display: flex; gap: 48px; z-index: 2;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .stat { border-left: 3px solid var(--red); padding-left: 16px; }
+  .stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--white); line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px; letter-spacing: 1px;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── RED STRIPE ── */
+  .stripe {
+    background: var(--red);
+    padding: 18px 8%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .stripe p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+  .stripe a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--white);
+    text-decoration: none;
+    background: rgba(0,0,0,.2);
+    padding: 8px 20px; border-radius: 2px;
+    transition: background .2s;
+  }
+  .stripe a:hover { background: rgba(0,0,0,.35); }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 100px 8%;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--red); opacity: .3;
+    max-width: 60px;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(30px, 3.5vw, 48px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.05;
+    margin-bottom: 20px;
+    letter-spacing: -.5px;
+  }
+  .about-body {
+    font-size: 16px; line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 32px;
+  }
+  .cert-list { display: flex; flex-direction: column; gap: 12px; }
+  .cert-item {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 600;
+    letter-spacing: .5px;
+    color: var(--navy);
+  }
+  .cert-item::before {
+    content: '✓';
+    width: 24px; height: 24px;
+    background: var(--red);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .about-visual {
+    background: var(--navy);
+    border-radius: 4px;
+    padding: 48px 40px;
+    display: flex; flex-direction: column; gap: 24px;
+    position: relative; overflow: hidden;
+  }
+  .about-visual::before {
+    content: 'LB';
+    position: absolute; right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Oswald', sans-serif;
+    font-size: 180px; font-weight: 700;
+    color: rgba(255,255,255,.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .visual-item {
+    border-left: 3px solid var(--red);
+    padding-left: 16px;
+  }
+  .visual-item h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+  .visual-item p {
+    font-size: 15px; color: rgba(255,255,255,.7);
+    line-height: 1.5;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--navy);
+    padding: 100px 8%;
+    position: relative; overflow: hidden;
+  }
+  .services::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,.02) 79px, rgba(255,255,255,.02) 80px),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,.02) 79px, rgba(255,255,255,.02) 80px);
+  }
+  .services-header { text-align: center; margin-bottom: 64px; position: relative; z-index: 1; }
+  .services-header .section-label { justify-content: center; }
+  .services-header .section-label::after { display: none; }
+  .services-header .section-title { color: var(--white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    position: relative; z-index: 1;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,.04);
+    padding: 40px 32px;
+    border: 1px solid rgba(255,255,255,.06);
+    position: relative; overflow: hidden;
+    transition: background .3s, transform .3s;
+    cursor: default;
+  }
+  .service-card:hover {
+    background: rgba(200,39,45,.1);
+    transform: translateY(-4px);
+    z-index: 2;
+    border-color: rgba(200,39,45,.3);
+  }
+  .service-icon {
+    width: 56px; height: 56px;
+    background: var(--red);
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    font-size: 22px;
+  }
+  .service-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px; font-weight: 600;
+    color: var(--white);
+    letter-spacing: .5px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .service-card p {
+    font-size: 14px; line-height: 1.7;
+    color: rgba(255,255,255,.55);
+  }
+  .service-card .tag {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid rgba(200,39,45,.4);
+    padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* ── PROCESS ── */
+  .process { padding: 100px 8%; background: var(--light-gray); }
+  .process-header { text-align: center; margin-bottom: 64px; }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    position: relative;
+  }
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 40px; left: 12.5%; right: 12.5%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--red), rgba(200,39,45,.2));
+    z-index: 0;
+  }
+  .step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+  .step-num {
+    width: 80px; height: 80px;
+    background: var(--navy);
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--white);
+    position: relative;
+  }
+  .step-num::after {
+    content: attr(data-num);
+    position: absolute;
+    top: -8px; right: -8px;
+    width: 24px; height: 24px;
+    background: var(--red);
+    border-radius: 50%;
+    font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px; font-weight: 600;
+    color: var(--navy); letter-spacing: .5px;
+    margin-bottom: 8px;
+  }
+  .step p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── WHY US ── */
+  .why { padding: 100px 8%; background: var(--cream); }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .why-cards { display: flex; flex-direction: column; gap: 16px; }
+  .why-card {
+    background: var(--white);
+    padding: 24px 28px;
+    border-radius: 2px;
+    border-left: 4px solid var(--red);
+    display: flex; align-items: flex-start; gap: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .why-card:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+  .why-icon { font-size: 28px; flex-shrink: 0; }
+  .why-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px; font-weight: 600;
+    color: var(--navy); margin-bottom: 6px;
+  }
+  .why-card p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--navy);
+    padding: 100px 8%;
+    position: relative; overflow: hidden;
+  }
+  .contact::after {
+    content: '';
+    position: absolute; bottom: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: var(--red);
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    opacity: .08;
+  }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+    position: relative; z-index: 1;
+  }
+  .contact-info .section-title { color: var(--white); }
+  .contact-info p { font-size: 16px; color: rgba(255,255,255,.6); line-height: 1.8; margin-bottom: 40px; }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 16px;
+    font-size: 15px; color: rgba(255,255,255,.8);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .contact-item:hover { color: var(--red); }
+  .contact-item-icon {
+    width: 44px; height: 44px;
+    background: rgba(200,39,45,.15);
+    border: 1px solid rgba(200,39,45,.3);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .contact-item-text strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 2px;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--red);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    color: var(--white);
+    outline: none;
+    transition: border-color .2s, background .2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--red);
+    background: rgba(200,39,45,.08);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+  .form-group select option { background: var(--navy); color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .btn-submit {
+    background: var(--red); color: var(--white);
+    border: none; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 2px;
+    transition: background .2s, transform .2s;
+    align-self: flex-start;
+  }
+  .btn-submit:hover { background: #a31f24; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0f1929;
+    padding: 40px 8%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .5px;
+  }
+  .footer-brand strong { color: rgba(255,255,255,.7); }
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,.3);
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--red); }
+
+  /* ── SCROLL ANIMATION ── */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  [data-reveal].visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    /* Hero: single column, stats flow naturally below buttons */
+    .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 0; }
+    .hero-right { display: none; }
+    .hero-left { padding: 100px 6% 48px; }
+    .hero-stats { gap: 20px; margin-top: 32px; padding-top: 24px; }
+
+    /* About: lighten the dark info card so text is readable */
+    .about { grid-template-columns: 1fr; gap: 40px; padding: 60px 6%; }
+    .about-visual {
+      background: #edeae2;
+      border: 1px solid #ccc8be;
+    }
+    .about-visual::before { display: none; }
+    .visual-item h4 { color: var(--red); }
+    .visual-item p { color: #333; }
+
+    .steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .steps::before { display: none; }
+    .why-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 540px) {
+    .steps { grid-template-columns: 1fr; }
+    .hero-stats { gap: 16px; }
+    .stat-num { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="hex-sm"><span>LB</span></div>
+    <div class="nav-name">
+      Luna-Bell Industries
+      <small>Environmental Testing</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-badge"><span>Licensed & Certified Inspectors</span></div>
+    <h1>
+      Protecting<br>
+      Your <em>Space.</em><br>
+      Protecting<br>
+      Your Family.
+    </h1>
+    <p class="hero-desc">
+      Luna-Bell Industries provides professional environmental testing and inspection services — from asbestos and lead to mold and radon. Accurate results. Fast turnaround. Peace of mind.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request an Inspection</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Inspections Completed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Certified Results</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">48hr</div>
+        <div class="stat-label">Avg. Report Turnaround</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right"><!-- hex logo -->
+    <div class="logo-hero">
+      <div class="hex-ring"></div>
+      <div class="hex-large">
+        <span class="initials">LB</span>
+        <div class="underline-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIPE -->
+<div class="stripe">
+  <p>📞 Ready to schedule your inspection? Call us today.</p>
+  <a href="tel:4154653509">415.465.3509 — Call Now</a>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div data-reveal>
+    <div class="section-label">About Luna-Bell Industries</div>
+    <h2 class="section-title">Bay Area's Trusted Environmental Inspection Experts</h2>
+    <p class="about-body">
+      Luna-Bell Industries specializes in detecting environmental hazards that can threaten the health and safety of homes, commercial properties, and worksites. Led by Project Manager <strong>Benjamin Fortune</strong>, our team brings industry-leading expertise, rigorous protocols, and certified laboratory analysis to every inspection.
+    </p>
+    <div class="cert-list">
+      <div class="cert-item">EPA-Certified Asbestos Inspectors</div>
+      <div class="cert-item">California-Licensed Lead Inspectors</div>
+      <div class="cert-item">Certified Mold Assessors</div>
+      <div class="cert-item">Accredited Laboratory Partners</div>
+      <div class="cert-item">Serving the Greater Bay Area</div>
+    </div>
+  </div>
+  <div class="about-visual" data-reveal>
+    <div class="visual-item">
+      <h4>Our Mission</h4>
+      <p>To provide accurate, timely, and reliable environmental testing that empowers property owners, buyers, and tenants to make informed decisions.</p>
+    </div>
+    <div class="visual-item">
+      <h4>Why It Matters</h4>
+      <p>Undetected asbestos, lead, mold, and radon can cause serious long-term health risks. Early detection is critical to protecting your family and investment.</p>
+    </div>
+    <div class="visual-item">
+      <h4>Our Commitment</h4>
+      <p>Every report we deliver meets or exceeds regulatory standards — backed by certified lab analysis and clear, actionable findings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header" data-reveal>
+    <div class="section-label">What We Test For</div>
+    <h2 class="section-title" style="color:var(--white);">Comprehensive Environmental Testing Services</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card" data-reveal>
+      <div class="service-icon">🏗️</div>
+      <h3>Asbestos Testing</h3>
+      <p>Bulk sampling, air monitoring, and full asbestos surveys for residential and commercial properties. Required before renovations or demolitions on older structures.</p>
+      <span class="tag">EPA Method</span>
+    </div>
+    <div class="service-card" data-reveal>
+      <div class="service-icon">🔬</div>
+      <h3>Lead Sampling</h3>
+      <p>Surface wipe sampling, soil sampling, and paint chip analysis to detect lead contamination — critical for homes built before 1978.</p>
+      <span class="tag">XRF & Lab Analysis</span>
+    </div>
+    <div class="service-card" data-reveal>
+      <div class="service-icon">🏠</div>
+      <h3>Lead Hazard Evaluation</h3>
+      <p>Full risk assessments and hazard evaluations that identify the extent of lead hazards and provide recommended abatement options.</p>
+      <span class="tag">HUD Compliant</span>
+    </div>
+    <div class="service-card" data-reveal>
+      <div class="service-icon">🌿</div>
+      <h3>Mold & Radon Inspection</h3>
+      <p>Visual inspections, air sampling, and swab testing for mold growth, combined with radon gas measurement to assess indoor air quality risks.</p>
+      <span class="tag">Air Quality Testing</span>
+    </div>
+    <div class="service-card" data-reveal>
+      <div class="service-icon">🧪</div>
+      <h3>PCT Testing</h3>
+      <p>Post-construction and post-remediation clearance testing to confirm environmental hazards have been successfully removed or mitigated.</p>
+      <span class="tag">Clearance Certified</span>
+    </div>
+    <div class="service-card" data-reveal>
+      <div class="service-icon">📋</div>
+      <h3>Full Property Reports</h3>
+      <p>Comprehensive written reports with lab results, findings, photographs, and regulatory references — ready for real estate transactions or regulatory compliance.</p>
+      <span class="tag">48–72 Hr Turnaround</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-header" data-reveal>
+    <div class="section-label" style="justify-content:center;">How It Works</div>
+    <h2 class="section-title">Simple. Fast. Reliable.</h2>
+  </div>
+  <div class="steps">
+    <div class="step" data-reveal>
+      <div class="step-num" data-num="1">01</div>
+      <h4>Schedule</h4>
+      <p>Call or email us to schedule a convenient inspection time. We work around your schedule.</p>
+    </div>
+    <div class="step" data-reveal>
+      <div class="step-num" data-num="2">02</div>
+      <h4>On-Site Inspection</h4>
+      <p>A certified inspector visits your property and collects samples using approved EPA methods.</p>
+    </div>
+    <div class="step" data-reveal>
+      <div class="step-num" data-num="3">03</div>
+      <h4>Lab Analysis</h4>
+      <p>Samples are processed by our accredited laboratory partners for accurate, certified results.</p>
+    </div>
+    <div class="step" data-reveal>
+      <div class="step-num" data-num="4">04</div>
+      <h4>Your Report</h4>
+      <p>Receive a detailed written report with findings, photos, and next-step recommendations within 48–72 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-grid">
+    <div data-reveal>
+      <div class="section-label">Why Luna-Bell</div>
+      <h2 class="section-title">Experience & Integrity You Can Count On</h2>
+      <p style="font-size:16px;color:var(--text-mid);line-height:1.8;margin-top:16px;">
+        When it comes to your family's health and your property's value, you need an inspector you can trust. Luna-Bell Industries delivers certified accuracy, clear communication, and fast results — every time.
+      </p>
+    </div>
+    <div class="why-cards" data-reveal>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <div>
+          <h4>Certified & Licensed</h4>
+          <p>All inspectors are EPA and California state certified, ensuring your reports meet all regulatory requirements.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div>
+          <h4>Fast Turnaround</h4>
+          <p>Most reports delivered within 48–72 hours — ideal for real estate closings and time-sensitive projects.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔍</div>
+        <div>
+          <h4>Accurate Lab Results</h4>
+          <p>We partner with accredited, independent laboratories to ensure unbiased and precise analysis.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <div>
+          <h4>Clear Communication</h4>
+          <p>We explain your results in plain language so you always know exactly what was found and what to do next.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info" data-reveal>
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Request Your Inspection Today</h2>
+      <p>Ready to schedule an inspection or have questions about our services? Reach out — we typically respond within one business day.</p>
+      <div class="contact-details">
+        <a href="tel:4154653509" class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <strong>Phone</strong>
+            415.465.3509
+          </div>
+        </a>
+        <a href="/cdn-cgi/l/email-protection#9cf0e9f2fdfef9f0f0f5f2f8e9efe8eef5f9efdcfbf1fdf5f0b2fff3f1" class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div class="contact-item-text">
+            <strong>Email</strong>
+            <span class="__cf_email__" data-cfemail="137f667d7271767f7f7a7d77666067617a766053747e727a7f3d707c7e">[email&#160;protected]</span>
+          </div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Service Area</strong>
+            Greater Bay Area, California
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-text">
+            <strong>Hours</strong>
+            Mon–Fri: 8AM – 6PM | Sat by appointment
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-reveal>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@email.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(415) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="">Select a service…</option>
+            <option>Asbestos Testing</option>
+            <option>Lead Sampling</option>
+            <option>Lead Hazard Evaluation</option>
+            <option>Mold Inspection</option>
+            <option>Radon Inspection</option>
+            <option>PCT Testing</option>
+            <option>Multiple / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Property Address / Notes</label>
+          <textarea placeholder="Tell us about your property and what you need…"></textarea>
+        </div>
+        <button class="btn-submit" onclick="alert('Thank you! We\'ll be in touch shortly.')">Submit Request →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <strong>Luna-Bell Industries</strong> · Benjamin Fortune, Project Manager
+  </div>
+  <div class="footer-copy">© 2024 Luna-Bell Industries. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting)
