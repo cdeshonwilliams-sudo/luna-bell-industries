@@ -968,7 +968,7 @@
           <label>Property Address / Notes</label>
           <textarea placeholder="Tell us about your property and what you need…"></textarea>
         </div>
-        <button class="btn-submit" onclick="alert('Thank you! We\'ll be in touch shortly.')">Submit Request →</button>
+        <button class="btn-submit" onclick="submitForm()">Submit Request →</button>
       </div>
     </div>
   </div>
@@ -987,9 +987,55 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
   // Scroll reveal
   const reveals = document.querySelectorAll('[data-reveal]');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting)
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  async function submitForm() {
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const data = {
+      firstName: document.querySelector('input[placeholder="John"]').value,
+      lastName: document.querySelector('input[placeholder="Smith"]').value,
+      email: document.querySelector('input[type="email"]').value,
+      phone: document.querySelector('input[type="tel"]').value,
+      service: document.querySelector('select').value,
+      location: document.querySelector('input[placeholder*="City"]') ? document.querySelector('input[placeholder*="City"]').value : '',
+      message: document.querySelector('textarea').value
+    };
+
+    try {
+      const res = await fetch('https://nqc4q402p3.execute-api.us-east-1.amazonaws.com/default/luna-bell-contact-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      btn.textContent = '✓ Request Sent!';
+      btn.style.background = '#2d6a2d';
+      setTimeout(() => {
+        btn.textContent = 'Submit Request →';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+
+    } catch (err) {
+      btn.textContent = 'Error — Try Again';
+      btn.style.background = '#8b0000';
+      btn.disabled = false;
+    }
+  }
+</script>
